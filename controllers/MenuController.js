@@ -16,7 +16,6 @@ module.exports = class MenuController {
     console.log("Welcome to AddressBuddy!");
     inquirer.prompt(this.mainMenuQuestions).then((response) => {
         switch(response.mainMenuChoice){
-            
         }
     })
   }
