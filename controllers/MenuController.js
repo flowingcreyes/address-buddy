@@ -15,9 +15,20 @@ module.exports = class MenuController {
   main() {
     console.log("Welcome to AddressBuddy!");
     inquirer.prompt(this.mainMenuQuestions).then((response) => {
-        switch(response.mainMenuChoice){
-        }
+      switch (response.mainMenuChoice) {
+        case "Add new contact":
+          this.addContact();
+          break;
+        case "Exit":
+          this.exit();
+        default:
+          console.log("invalid input");
+          this.main();
+      }
     })
+      .catch((err) => {
+        console.log(err)
+      })
   }
   clear() {
     console.log("\x1Bc");
@@ -29,7 +40,7 @@ module.exports = class MenuController {
   }
 
   exit() {
-    console.log("AddressBuddy says goodbye!");
+    console.log("Hope to see you soon!");
     process.exit();
   }
 };
