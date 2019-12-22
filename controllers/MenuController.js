@@ -43,4 +43,8 @@ module.exports = class MenuController {
     console.log("Hope to see you soon!");
     process.exit();
   }
+
+  getContactCount() {
+    return this.contacts.length;
+  }
 };
