@@ -1,4 +1,5 @@
 let inquirer = require("inquirer");
+let ContactController = require("./ContactController");
 
 module.exports = class MenuController {
   constructor() {
@@ -10,7 +11,7 @@ module.exports = class MenuController {
         choices: ["Add new contact", "Exit"]
       }
     ];
-    this.contacts = [];
+    this.book = new ContactController();
   }
   main() {
     console.log("Welcome to AddressBuddy!");
