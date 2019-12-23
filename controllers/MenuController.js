@@ -15,39 +15,44 @@ module.exports = class MenuController {
   }
   main() {
     console.log("Welcome to AddressBuddy!");
-    inquirer.prompt(this.mainMenuQuestions).then((response) => {
-      switch (response.mainMenuChoice) {
-        case "Add new contact":
-          this.addContact();
-          break;
-        case "View all contacts":
-          this.getContacts()
-          break;
-        case "Exit":
-          this.exit();
-        default:
-          console.log("invalid input");
-          this.main();
-      }
-    })
-      .catch((err) => {
-        console.log(err)
+    inquirer
+      .prompt(this.mainMenuQuestions)
+      .then(response => {
+        switch (response.mainMenuChoice) {
+          case "Add new contact":
+            this.addContact();
+            break;
+          case "View all contacts":
+            this.getContacts();
+            break;
+          case "Exit":
+            this.exit();
+          default:
+            console.log("invalid input");
+            this.main();
+        }
       })
+      .catch(err => {
+        console.log(err);
+      });
   }
   clear() {
     console.log("\x1Bc");
   }
   addContact() {
     this.clear();
-    inquirer.prompt(this.book.addContactQuestions).then((answers) => {
-      this.book.addContact(answers.name, answers.phone, answers.email).then((contact) => {
-        console.log("Contact added successfully!")
-        this.main()
-      }).catch((err) => {
-        console.log(err)
-        this.main()
-      })
-    })
+    inquirer.prompt(this.book.addContactQuestions).then(answers => {
+      this.book
+        .addContact(answers.name, answers.phone, answers.email)
+        .then(contact => {
+          console.log("Contact added successfully!");
+          this.main();
+        })
+        .catch(err => {
+          console.log(err);
+          this.main();
+        });
+    });
   }
 
   exit() {
@@ -57,17 +62,20 @@ module.exports = class MenuController {
 
   getContacts() {
     this.clear();
-    this.book.getContacts().then(contacts => {
-      for (let contact of contacts) {
-        console.log(`
+    this.book
+      .getContacts()
+      .then(contacts => {
+        for (let contact of contacts) {
+          console.log(`
         name: ${contact.name} 
         phone number: ${contact.phone} 
         email: ${contact.email} 
-        ---------------`)
-      }
-      this.main()
-    }).catch(err => {
-      console.log(err)
-    })
+        ---------------`);
+        }
+        this.main();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
