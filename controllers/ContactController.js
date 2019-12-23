@@ -29,6 +29,31 @@ module.exports = class ContactController {
         }
       }
     ];
+    this.searchQuestions = [
+      {
+        type: "input",
+        name: "name",
+        message: "Name of contact to search - ",
+        validate(val) {
+          return val !== "";
+        }
+      }
+    ];
+    this.showContactQuestions = [
+      {
+        type: "list",
+        name: "selected",
+        message: "Choose from an option below: ",
+        choices: ["Delete contact", "Main menu"]
+      }
+    ];
+    this.deleteConfirmQuestions = [
+      {
+        type: "confirm",
+        name: "confirmation",
+        message: "Are you sure you want to delete this contact?"
+      }
+    ];
   }
   addContact(name, phone, email) {
     return Contact.create({ name, phone, email });
@@ -44,6 +69,11 @@ module.exports = class ContactController {
     }
     return null;
   }
+  search(name) {
+    return Contact.findOne({
+      where: { name }
+    });
+  }
   binarySearch(contacts, target) {
     let min = 0;
     let max = contacts.length - 1;
@@ -58,7 +88,12 @@ module.exports = class ContactController {
       } else {
         return contacts[mid];
       }
-      return null;
     }
+    return null;
+  }
+  delete(id) {
+    return Contact.destroy({
+      where: { id }
+    });
   }
 };
