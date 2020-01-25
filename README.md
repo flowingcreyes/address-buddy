@@ -10,5 +10,6 @@ address-buddy is a bit of software I made that mimics a phone book and can run a
 ---
 **STEPS**
 
+(configure the database permissions in the db/conig file first)
 1. npm install
 2. node app.js (run that in bash)
