@@ -13,5 +13,5 @@ address-buddy is a piece of software I made that mimics a phone book and can run
 (configure the database permissions in the db/config file first)
 
 1. npm install
-2. sequelize db:migrate && sequelize db:migrate --env test
+2. run: sequelize db:migrate && sequelize db:migrate --env test
 3. node app.js (run that in bash)
